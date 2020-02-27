@@ -1,5 +1,5 @@
 export class Utilisateurs {
-  identifant: null;
+  identifiant: null;
   username: '';
   password: '';
   profile: '';
