@@ -1,0 +1,87 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Ajout d'un nouveau utilisateur</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <form class="example-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>identifiant</mat-label>
+              <input type="text" formControlName="identifiant" class="form-control" matInput [ngClass]="{ 'is-invalid': submitted && f.identifiant.errors }" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>date de creation</mat-label>
+              <input formControlName="datecreation" class="form-control" matInput [matDatepicker]="picker" matInput [ngClass]="{ 'is-invalid': submitted && f.datecreation.errors }" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+             <!-- <mat-label>datecreation</mat-label>
+              <input type="text" formControlName="datecreation" class="form-control" matInput [ngClass]="{ 'is-invalid': submitted && f.datecreation.errors }" required>-->
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>date de fin</mat-label>
+              <input formControlName="datefin" class="form-control" matInput [matDatepicker]="pickers" matInput [ngClass]="{ 'is-invalid': submitted && f.datefin.errors }" required>
+              <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+              <mat-datepicker #pickers></mat-datepicker>
+              <!--<mat-label>datefin</mat-label>
+              <input type="text" formControlName="datefin" class="form-control" matInput [ngClass]="{ 'is-invalid': submitted && f.datefin.errors }" required>-->
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>email</mat-label>
+              <input type="text" formControlName="email" class="form-control" matInput [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>username</mat-label>
+              <input type="text" formControlName="username" class="form-control" matInput [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>Mot de passe</mat-label>
+            <input type="password" formControlName="password" class="form-control" matInput [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
+          </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>photo</mat-label>
+              <input type="text" formControlName="photo" class="form-control" matInput [ngClass]="{ 'is-invalid': submitted && f.photo.errors }" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>Profile</mat-label>
+              <input type="text" formControlName="profile" class="form-control" matInput [ngClass]="{ 'is-invalid': submitted && f.profile.errors }" required>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button [disabled] mat-raised-button (click)="onSubmit()" color="accent" class="btn-right">Ajouter</button>
+    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+  </mat-card-actions>
+</mat-card>

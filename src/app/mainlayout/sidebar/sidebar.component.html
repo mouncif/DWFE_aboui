@@ -1,0 +1,10 @@
+<app-topbar></app-topbar>
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened class="example-sidenav">
+    <button mat-raised-button class="mat-button" *ngFor="let item of listElement;" >{{item.name}}</button>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-headerbar></app-headerbar>
+    <app-navigationbar></app-navigationbar>
+  </mat-drawer-content>
+</mat-drawer-container>
