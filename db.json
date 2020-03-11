@@ -1,0 +1,87 @@
+{
+  "users": [
+    {
+      "id": 5,
+      "username": "abioui",
+      "password": "1245",
+      "profile": "Editor",
+      "datecreation": "2020-02-24T23:00:00.000Z",
+      "datefin": "2020-02-28T23:00:00.000Z",
+      "email": "houssam@gmail.com",
+      "photoPath": "src/image.png"
+    }
+  ],
+  "profiles": [
+    {
+      "id": 2,
+      "name": "Admin",
+      "proteger": true
+    },
+    {
+      "id": 3,
+      "name": "Editor",
+      "proteger": true
+    },
+    {
+      "id": 4,
+      "name": "User",
+      "proteger": false
+    },
+    {
+      "id": 5,
+      "name": "Fournisseur",
+      "proteger": false
+    },
+    {
+      "id": 6,
+      "name": "DSI",
+      "proteger": false
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "nom": "abioui",
+      "prenom": "houssam",
+      "statut": "active",
+      "photo": "src/image.png",
+      "tel": "0654247221",
+      "email": "houssam@gmail.com",
+      "adresse": "fes,maroc",
+      "ville": "fes",
+      "username": "houssamab",
+      "password": "12345",
+      "proteger": true
+    },
+    {
+      "id": 2,
+      "nom": "amayoune",
+      "prenom": "anass",
+      "statut": "active",
+      "photo": "src/local.png",
+      "tel": "062000606",
+      "email": "tst.street@gmail.com",
+      "adresse": "ville test ",
+      "ville": "Beni mellal",
+      "username": "anass",
+      "password": "1234",
+      "proteger": false
+    }
+  ],
+  "fournisseurs": [],
+  "produits": [
+    {
+      "id": 1,
+      "nom": "samsung s8",
+      "nom_court": "s8",
+      "prix_base": 5000,
+      "prix_vente": 6500,
+      "remise_max": 6000,
+      "unites": 50,
+      "image": "path/image.png",
+      "stock_init": 50,
+      "stock_actuel": 50,
+      "proteger": false
+    }
+  ]
+}
