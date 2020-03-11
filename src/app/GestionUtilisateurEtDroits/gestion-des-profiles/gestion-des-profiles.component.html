@@ -4,21 +4,28 @@
   </mat-card-header>
   <mat-divider></mat-divider>
   <mat-card-content>
-    <form class="example-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form class="example-form" [formGroup]="UserService.formProfile" (ngSubmit)="onSubmit()">
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td>
             <mat-form-field class="example-full-width">
               <mat-label>Profile</mat-label>
-              <input type="text" formControlName="profile" class="form-control" matInput [ngClass]="{ 'is-invalid': submitted && f.profile.errors }" required>
+              <input type="text" formControlName="name" class="form-control" matInput required>
             </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="add-bottom-padding">
+              <mat-checkbox formControlName="proteger" required> Proteger </mat-checkbox>
+            </div>
           </td>
         </tr>
       </table>
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button [disabled] mat-raised-button (click)="onSubmit()" color="accent" class="btn-right">Ajouter</button>
+    <button [disabled] mat-raised-button (click)="onSubmit()" color="accent" class="btn-right">Envoyer</button>
     <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
   </mat-card-actions>
 </mat-card>

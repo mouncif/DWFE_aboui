@@ -1,1 +1,107 @@
-<p>gestion-des-produits works!</p>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Ajout d'un nouveau Produit</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <form class="example-form" [formGroup]="vService.formProduits" (submit)="onSubmit()">
+      <table class="example-full-width" cellspacing="0">
+        <tr >
+          <td>
+            <mat-form-field class="example-full-width" >
+              <mat-label>id</mat-label>
+              <input type="text"  formControlName="id" class="form-control"  matInput  >
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>nom</mat-label>
+              <input type="text" formControlName="nom" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>nom court</mat-label>
+              <input type="text" formControlName="nom_court" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>prix base</mat-label>
+              <input type="number" formControlName="prix_base" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>prix vente</mat-label>
+              <input type="number" formControlName="prix_vente" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>remise max</mat-label>
+            <input type="number" formControlName="remise_max" class="form-control" matInput required>
+          </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>unites</mat-label>
+              <input type="number" formControlName="unites" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>image</mat-label>
+              <input type="text" formControlName="image" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>stock init</mat-label>
+              <input type="number" formControlName="stock_init" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>stock actuel</mat-label>
+              <input type="number" formControlName="stock_actuel" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="add-bottom-padding">
+              <mat-checkbox formControlName="proteger" > Proteger </mat-checkbox>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <button [disabled]="vService.formProduits.invalid" mat-raised-button type="submit" color="accent" class="btn-right">Envoyer</button>
+      <button [disabled] mat-raised-button (click)="onClear()" color="warn" class="btn-right">Vider !</button>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <!--
+        <button [disabled] mat-raised-button (click)="onSubmit()" color="accent" class="btn-right">Ajouter</button>
+    -->
+
+    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+  </mat-card-actions>
+</mat-card>

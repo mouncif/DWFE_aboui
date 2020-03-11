@@ -3,6 +3,7 @@ import {MatTableDataSource} from '@angular/material';
 import {Utilisateurs} from '../../models/utilisateurs';
 import {UsersServiceService} from '../../services/users-service.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-utilisateurs',
@@ -14,9 +15,13 @@ export class UtilisateursComponent implements OnInit {
   user: Utilisateurs;
   dataSource = new MatTableDataSource<Utilisateurs>();
   // tslint:disable-next-line:max-line-length
-  displayedColumns: string[] = ['identifiant', 'datecreation', 'datefin', 'email', 'username', 'password', 'photoPath', 'profile' , 'actions'];
+  displayedColumns: string[] = ['id', 'datecreation', 'datefin', 'email', 'username', 'password', 'photoPath', 'profile' , 'actions'];
 
-  constructor(private service: UsersServiceService , private router: Router) { }
+  constructor(private controle: AuthService , private service: UsersServiceService , private router: Router) {
+    if (!this.controle.currentUserValue) {
+      this.router.navigate(['/']);
+    }
+  }
 
   ngOnInit() {
     this.fetchElements();
@@ -47,9 +52,9 @@ export class UtilisateursComponent implements OnInit {
 
   onEdit(user) {
     this.router.navigate(['/add']);
-    this.service.populateForm(user);
-    // this.service.updateUser(user).subscribe(() => {
-      // this.fetchElements();
-    // });
+    this.service.populateFormUtilisateur(user);
+    this.service.updateUser(user).subscribe(() => {
+       this.fetchElements();
+     });
   }
 }

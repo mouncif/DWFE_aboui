@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UsersServiceService} from '../../services/users-service.service';
 import {Utilisateurs} from '../../models/utilisateurs';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-ajouter-utilisateur',
@@ -13,10 +14,10 @@ export class AjouterUtilisateurComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
-  returnUrl: string;
   users: Utilisateurs[] = [];
+
   private user: Utilisateurs = {
-    identifiant: null,
+    id: null,
     username: null,
     password: null,
     profile: null,
@@ -25,27 +26,19 @@ export class AjouterUtilisateurComponent implements OnInit {
     email: null,
     photoPath: null,
   };
-  constructor(private formBuilder: FormBuilder, private UserService: UsersServiceService, private route: ActivatedRoute,
-  ) { }
+  constructor(private service: AuthService,   private formBuilder: FormBuilder, private UserService: UsersServiceService, private router: Router) {
+    if (!this.service.currentUserValue) {
+      this.router.navigate(['/']);
+    }
+  }
 
-
+  onClear() {
+    this.UserService.initializeFormUtilisateur();
+    this.UserService.formUtilisateur.reset();
+  }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      identifiant: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      profile: ['', Validators.required],
-      datecreation: ['', Validators.required],
-      datefin: ['', Validators.required],
-      email: ['', Validators.required],
-      photo: ['', Validators.required],
-
-    });
-
-    // get return url from route parameters or default to '/'
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+    this.UserService.selectUtilisateurs();
   }
 
   // convenience getter for easy access to form fields
@@ -54,27 +47,30 @@ export class AjouterUtilisateurComponent implements OnInit {
   }
 
 
+
   onSubmit() {
-    this.user.identifiant = this.f.identifiant.value;
-    this.user.datecreation = this.f.datecreation.value;
-    this.user.datefin = this.f.datefin.value;
-    this.user.email = this.f.email.value;
-    this.user.username = this.f.username.value;
-    this.user.password = this.f.password.value;
-    this.user.photoPath = this.f.photo.value;
-    this.user.profile = this.f.profile.value;
-    this.submitted = true;
-    console.log(this.user);
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      alert('form erreur validator !');
-     // return;
+    if (this.UserService.formUtilisateur.valid) {
+      this.user = this.UserService.formUtilisateur.value;
+      if (this.UserService.formUtilisateur.value.id == null) {
+        console.log(this.user);
+        this.loading = true;
+        this.UserService.addUser(this.user).subscribe((user) => this.users = [user, ...this.users]);
+        this.loading = false;
+        this.UserService.formUtilisateur.reset();
+        this.UserService.initializeFormUtilisateur();
+        this.router.navigate(['/listeuser']);
+
+        alert('Utilisateur ajouter !');
+
+      } else {
+        console.log(this.user);
+        this.UserService.updateUser(this.UserService.formUtilisateur.value).subscribe(() => {
+          this.router.navigate(['/listeuser']);
+        });
+        alert('Utilisateur updated !');
+
+      }
     }
 
-
-    this.loading = true;
-    this.UserService.addUser(this.user).subscribe((user) => this.users = [user, ...this.users]);
-    this.loading = false;
-    alert('Utilisateur ajouter !');
   }
 }

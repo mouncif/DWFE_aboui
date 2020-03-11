@@ -1,5 +1,5 @@
 export class Utilisateurs {
-  identifiant: null;
+  id?: null;
   username: '';
   password: '';
   profile: '';
@@ -7,5 +7,4 @@ export class Utilisateurs {
   datefin: '';
   email: '';
   photoPath: '';
-
 }

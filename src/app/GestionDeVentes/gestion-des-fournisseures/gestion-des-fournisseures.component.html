@@ -1,1 +1,115 @@
-<p>gestion-des-fournisseures works!</p>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Ajout d'un nouveau client</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <form class="example-form" [formGroup]="vService.formClients" (submit)="onSubmit()">
+      <table class="example-full-width" cellspacing="0">
+        <tr >
+          <td>
+            <mat-form-field class="example-full-width" >
+              <mat-label>id</mat-label>
+              <input type="text"  formControlName="id" class="form-control"  matInput  >
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>nom</mat-label>
+              <input type="text" formControlName="nom" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>prenom</mat-label>
+              <input type="text" formControlName="prenom" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>statut</mat-label>
+              <input type="text" formControlName="statut" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>photo</mat-label>
+              <input type="text" formControlName="photo" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>tel</mat-label>
+            <input type="text" formControlName="tel" class="form-control" matInput required>
+          </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>email</mat-label>
+              <input type="text" formControlName="email" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>adresse</mat-label>
+              <input type="text" formControlName="adresse" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>ville</mat-label>
+              <input type="text" formControlName="ville" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>username</mat-label>
+              <input type="text" formControlName="username" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>password</mat-label>
+              <input type="password" formControlName="password" class="form-control" matInput required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="add-bottom-padding">
+              <mat-checkbox formControlName="proteger" > Proteger </mat-checkbox>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <button [disabled]="vService.formClients.invalid" mat-raised-button type="submit" color="accent" class="btn-right">Envoyer</button>
+      <button [disabled] mat-raised-button (click)="onClear()" color="warn" class="btn-right">Vider !</button>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <!--
+        <button [disabled] mat-raised-button (click)="onSubmit()" color="accent" class="btn-right">Ajouter</button>
+    -->
+
+    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+  </mat-card-actions>
+</mat-card>

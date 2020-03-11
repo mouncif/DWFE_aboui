@@ -6,17 +6,15 @@
   <mat-card-content>
     <div class="mat-elevation-z8">
       <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder=" Filter">
       </mat-form-field>
 
       <table mat-table [dataSource]="dataSource">
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="identifiant">
+        <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> identifiant </th>
-          <td mat-cell *matCellDef="let element"> {{element.identifiant}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
         </ng-container>
-
         <!-- Name Column -->
         <ng-container matColumnDef="datecreation">
           <th mat-header-cell *matHeaderCellDef> date de creation </th>
@@ -59,9 +57,9 @@
 
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-icon-button color="warn" (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
-            <button mat-icon-button color="primary" (click)="onDelete(row.id)"><mat-icon>delete_outline</mat-icon></button>
+          <td mat-cell *matCellDef="let row ; let element">
+            <button [disabled] ="((controle.iseditor) && (element.proteger) ? true : false ) || controle.isuser ? true : false" mat-icon-button color="warn" (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+            <button [disabled]="controle.iseditor ? true : false ||  controle.isuser ? true : false" mat-icon-button color="primary" (click)="onDelete(row.id)"><mat-icon>delete_outline</mat-icon></button>
           </td>
         </ng-container>
 

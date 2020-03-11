@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
+import {Utilisateurs} from '../../models/utilisateurs';
 
 @Component({
   selector: 'app-headerbar',
@@ -11,5 +14,6 @@ export class HeaderbarComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
 }

@@ -1,10 +1,18 @@
 <app-topbar></app-topbar>
 <mat-drawer-container class="example-container">
   <mat-drawer mode="side" opened class="example-sidenav">
-    <button mat-raised-button class="mat-button" *ngFor="let item of listElement;" >{{item.name}}</button>
+    <button mat-raised-button  class="mat-button" routerLink="/accueil">Accueil</button>
+    <button [matMenuTriggerFor]="GestiondeVentes" mat-raised-button class="mat-button">Gestion de ventes</button>
+    <button [matMenuTriggerFor]="Gestiondesutilisateursetdroits" mat-raised-button class="mat-button">Gestion des utilisateurs et droits</button>
+      <mat-menu #GestiondeVentes="matMenu">
+        <button mat-menu-item class="mat-button" *ngFor="let item of GestionVentes;" [routerLink]="item.link">{{item.name}}</button>
+      </mat-menu>
+    <mat-menu #Gestiondesutilisateursetdroits="matMenu">
+        <button mat-menu-item class="mat-button" *ngFor="let elm of GestionUsers;" [routerLink]="elm.link">{{elm.name}}</button>
+      </mat-menu>
   </mat-drawer>
   <mat-drawer-content>
     <app-headerbar></app-headerbar>
-    <app-navigationbar></app-navigationbar>
+    <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

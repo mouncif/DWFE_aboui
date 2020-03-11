@@ -1,4 +1,11 @@
 <mat-toolbar>
   <mat-toolbar-row>
     <span>SmartVentes</span>
+    <span class="fill-space"></span>
+    <button mat-raised-button class="user" *ngIf="currentUser"  [matMenuTriggerFor]="Options" >{{currentUser.username }}
+    </button>
+    <mat-menu #Options="matMenu">
+      <button mat-menu-item ><mat-icon>account_circle</mat-icon>Profile</button>
+      <button mat-menu-item (click)="onLogout()" ><mat-icon>logout</mat-icon> Déconnecter</button>
+    </mat-menu>
 </mat-toolbar-row>

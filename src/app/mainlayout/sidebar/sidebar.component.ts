@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
+import {UsersServiceService} from '../../services/users-service.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,11 +10,19 @@ import {Router} from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   private listElement;
-  constructor() { }
-
-  ngOnInit() {
-    // tslint:disable-next-line:max-line-length
-    this.listElement = [{id : 1, name : 'Accueil', link : '/accueil'}, {id : 3, name : 'Gestion de Ventes', link : '/prof/avis'}, {id : 4, name : 'Gestion des droits', link : '/prof/exam'}, {id : 6, name : 'Gestion des utilisateurs', link : '/aboutus'}];
+  private GestionVentes;
+  private GestionUsers;
+  gVentes: any;
+  gUsers: any;
+  constructor(private router: Router, private service: AuthService) {
+    this.GestionVentes = this.service.gventes.subscribe(x => this.gVentes = x);
+    this.GestionUsers = this.service.gusers.subscribe(x => this.gUsers = x);
   }
+
+ngOnInit() {
+    this.GestionVentes = this.gVentes;
+    this.GestionUsers = this.gUsers;
+  }
+
 
 }

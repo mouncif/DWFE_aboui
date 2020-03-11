@@ -8,7 +8,7 @@ import { SidebarComponent } from './mainlayout/sidebar/sidebar.component';
 import { TopbarComponent } from './mainlayout/topbar/topbar.component';
 import { HeaderbarComponent } from './mainlayout/headerbar/headerbar.component';
 import { NavigationbarComponent } from './mainlayout/navigationbar/navigationbar.component';
-import {MatCardModule, MatListModule, MatSidenavModule, MatTabsModule} from '@angular/material';
+import {MatCardModule, MatListModule, MatMenuModule, MatSidenavModule, MatTabsModule} from '@angular/material';
 import {RouterModule} from '@angular/router';
 import { AjouterUtilisateurComponent } from './GestionUtilisateurEtDroits/ajouter-utilisateur/ajouter-utilisateur.component';
 import { GestionDesProfilesComponent } from './GestionUtilisateurEtDroits/gestion-des-profiles/gestion-des-profiles.component';
@@ -22,6 +22,11 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {UsersServiceService} from './services/users-service.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
+import { ProfilesComponent } from './GestionUtilisateurEtDroits/profiles/profiles.component';
+import { FournisseursComponent } from './GestionDeVentes/fournisseurs/fournisseurs.component';
+import {GVentesService} from './services/g-ventes.service';
+import {LoginComponent} from './login/login.component';
+import {AuthService} from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -37,22 +42,26 @@ import {AppRoutingModule} from './app-routing.module';
     AjouterUnClientComponent,
     ProduitsComponent,
     GestionDesProduitsComponent,
-    GestionDesFournisseuresComponent
+    GestionDesFournisseuresComponent,
+    ProfilesComponent,
+    FournisseursComponent,
+    LoginComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    MatSidenavModule,
-    RouterModule,
-    MatTabsModule,
-    MatCardModule,
-    MatListModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-  ],
-  providers: [UsersServiceService, HttpClient],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        MatSidenavModule,
+        RouterModule,
+        MatTabsModule,
+        MatCardModule,
+        MatListModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        MatMenuModule,
+    ],
+  providers: [UsersServiceService, GVentesService , AuthService , HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
